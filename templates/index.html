@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Calculadora de Preço de Venda</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+
+  <body>
+    <h1>Calculadora de Preço de Venda</h1>
+    <form action="/calculate" method="post" enctype="multipart/form-data">
+      <label for="xmlFile">Carregar XML:</label>
+      <input type="file" id="xmlFile" name="xmlFile" accept=".xml"><br><br>
+
+      <label for="markup">Markup (%):</label>
+      <input type="number" id="markup" name="markup" step="0.1" value="50"><br><br>
+
+      <label for="additional">Valor Adicional (%):</label>
+      <input type="number" id="additional" name="additional" step="0.1" value="5"><br><br>
+
+      <label for="federalTax">Incluir Imposto Federal (7%):</label>
+      <input type="checkbox" id="federalTax" name="federalTax" checked><br><br>
+
+      <button type="submit">Calcular</button>
+    </form>
+  </body>
+</html>
