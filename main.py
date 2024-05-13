@@ -22,6 +22,7 @@ def calculate():
     # Fetch other form data
     markup = request.form['markup']
     additional = request.form['additional']
+    freight = request.form['freight']
     include_tax = 'federalTax' in request.form
 
     # Adding namespace
@@ -31,7 +32,7 @@ def calculate():
     product_data = extract_data_from_xml(file, namespaces)
 
     # Return extracted data to page
-    return render_template('index.html', product_data=product_data, markup=markup, additional=additional, include_tax=include_tax)
+    return render_template('index.html', product_data=product_data, markup=markup, additional=additional, freight=freight, include_tax=include_tax)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000, debug=True)
