@@ -23,5 +23,25 @@
 
       <button type="submit">Calcular</button>
     </form>
+
+    {% if product_data %}
+      <h2>Detalhes dos Produtos:</h2>
+      {% for product in product_data %}
+        <p>
+          Nome do Produto: {{ product['Nome do Produto'] }}<br>
+          CFOP: {{ product['CFOP'] }}<br>
+          Valor Unitário: R$ {{ product['Valor Unitário'] }}<br>
+          Alíq. ICMS: {{ product['Alíq. ICMS'] }}%<br>
+          Alíq. IPI: {{ product['Alíq. IPI'] }}%<br>
+        </p>
+        <hr>
+      {% endfor %}
+      <h2>Dados do Formulário</h2>
+      <p>
+        Markup Selecionado: {{ markup }}%<br>
+        Valor Adicional Selecionado: {{ additional }}%<br>
+        Incluir Imposto Federal: {{ 'Sim' if include_tax else 'Não' }}
+      </p>
+    {% endif %}
   </body>
 </html>
