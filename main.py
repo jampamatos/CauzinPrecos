@@ -6,10 +6,6 @@ from xml_processor import extract_data_from_xml
 app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
-def root():
-    return redirect(url_for('index'))
-
-@app.route('/calculadora')
 def index():
     return render_template('index.html')
 
