@@ -1,10 +1,15 @@
 from flask import Flask, redirect, render_template, request, url_for
+
 from price_calculator import calculate_cost_price, calculate_selling_price
 from xml_processor import extract_data_from_xml
 
 app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
+def root():
+    return redirect(url_for('index'))
+
+@app.route('/calculadora')
 def index():
     return render_template('index.html')
 
@@ -34,4 +39,4 @@ def calculate():
     return render_template('index.html', product_data=product_data, markup=markup, additional=additional, freight=freight, include_tax=include_tax)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
