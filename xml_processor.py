@@ -26,11 +26,15 @@ def extract_data_from_xml(xml_file, namespaces):
         # Assure formatting with two decimals
         icms_value = f"{float(icms_value):.2f}%"
         ipi_value = f"{float(ipi_value):.2f}%"
+
+        # Format 'Valor Unitário' to two decimal places
+        unit_value = float(item.find('.//nfe:prod/nfe:vUnCom', namespaces=namespaces).text)
+        formatted_unit_value = f"{unit_value:.2f}"
         
         product_data = {
           "Nome do Produto": item.find('.//nfe:prod/nfe:xProd', namespaces=namespaces).text,
           "CFOP": item.find('.//nfe:prod/nfe:CFOP', namespaces=namespaces).text,
-          "Valor Unitário": item.find('.//nfe:prod/nfe:vUnCom', namespaces=namespaces).text,
+          "Valor Unitário": formatted_unit_value,
           "Alíq. ICMS": icms_value,
           "Alíq. IPI": ipi_value
         }

@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Calculadora de Preço de Venda</title>
     <link rel="stylesheet" href="/static/style.css">
-  </head>
-
-  <body>
+</head>
+<body>
     <h1>Calculadora de Preço de Venda</h1>
     <form action="/calculate" method="post" enctype="multipart/form-data">
-      <label for="xmlFile">Carregar XML:</label>
-      <input type="file" id="xmlFile" name="xmlFile" accept=".xml"><br><br>
+        <label for="xmlFile">Carregar XML:</label>
+        <input type="file" id="xmlFile" name="xmlFile" accept=".xml"><br><br>
 
-      <label for="markup">Markup (%):</label>
-      <input type="number" id="markup" name="markup" step="0.1" value="50"><br><br>
+        <label for="markup">Markup (%):</label>
+        <input type="number" id="markup" name="markup" step="0.1" value="50"><br><br>
 
-      <label for="additional">Valor Adicional (%):</label>
-      <input type="number" id="additional" name="additional" step="0.1" value="5"><br><br>
+        <label for="additional">Valor Adicional (%):</label>
+        <input type="number" id="additional" name="additional" step="0.1" value="5"><br><br>
 
-      <label for="freight">Frete (%):</label>
-      <input type="number" id="freight" name="freight" step="0.1" value="0"><br><br>
+        <label for="freight">Frete (%):</label>
+        <input type="number" id="freight" name="freight" step="0.1" value="0"><br><br>
 
-      <label for="federalTax">Incluir Imposto Federal (7%):</label>
-      <input type="checkbox" id="federalTax" name="federalTax" checked><br><br>
+        <label for="federalTax">Incluir Imposto Federal (7%):</label>
+        <input type="checkbox" id="federalTax" name="federalTax" checked><br><br>
 
-      <button type="submit">Calcular</button>
+        <button type="submit">Calcular</button>
     </form>
 
     {% if product_data %}
-      <h2>Detalhes dos Produtos:</h2>
-      {% for product in product_data %}
+        <h2>Dados do Formulário:</h2>
         <p>
-          Nome do Produto: {{ product['Nome do Produto'] }}<br>
-          CFOP: {{ product['CFOP'] }}<br>
-          Valor Unitário: R$ {{ product['Valor Unitário'] }}<br>
-          Alíq. ICMS: {{ product['Alíq. ICMS'] }}<br>
-          Alíq. IPI: {{ product['Alíq. IPI'] }}<br>
-          Preço de Custo Final: R$ {{ product['Preço de Custo Final'] }}<br>
-          Preço de Venda: R$ {{ product['Preço de Venda'] }}
+            Markup Selecionado: {{ markup }}%<br>
+            Valor Adicional Selecionado: {{ additional }}%<br>
+            Frete Adicionado: {{ freight }}%<br>
+            Incluir Imposto Federal: {{ 'Sim' if include_tax else 'Não' }}
         </p>
-        <hr>
-      {% endfor %}
-      <h2>Dados do Formulário</h2>
-      <p>
-        Markup Selecionado: {{ markup }}%<br>
-        Valor Adicional Selecionado: {{ additional }}%<br>
-        Frete Adicionado: {{ freight }}%<br>
-        Incluir Imposto Federal: {{ 'Sim' if include_tax else 'Não' }}
-      </p>
+        <h2>Cálculo dos Preços:</h2>
+        <table border="1">
+            <tr>
+                <th>Produto</th>
+                <th>CFOP</th>
+                <th>Custo Unit</th>
+                <th>Aliq. ICMS</th>
+                <th>Aliq. IPI</th>
+                <th>Frete</th>
+                <th>Imposto Federal</th>
+                <th>Venda Final</th>
+            </tr>
+            {% for product in product_data %}
+            <tr>
+                <td>{{ product['Nome do Produto'] }}</td>
+                <td>{{ product['CFOP'] }}</td>
+                <td>R$ {{ product['Valor Unitário'] }}</td>
+                <td>{{ product['Alíq. ICMS'] }}</td>
+                <td>{{ product['Alíq. IPI'] }}</td>
+                <td>{{ freight }}%</td>
+                <td>{{ 'Sim' if include_tax else 'Não' }}</td>
+                <td>R$ {{ '%.2f' | format(product['Preço de Venda']) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     {% endif %}
-  </body>
+</body>
 </html>

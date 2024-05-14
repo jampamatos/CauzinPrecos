@@ -1,5 +1,5 @@
 def calculate_cost_price(unit_price, icms_rate, ipi_rate, cfop, freight):
-  unit_price = float(unit_price)
+  unit_price = round(float(unit_price), 2)
   freight = float(freight)/100
 
   # Determine effective ICMS tax based on CFOP and ICMS and/ or IPI rate
