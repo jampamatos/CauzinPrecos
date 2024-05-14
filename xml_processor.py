@@ -22,7 +22,11 @@ def extract_data_from_xml(xml_file, namespaces):
             if pipi_element is not None:
                 ipi_value = pipi_element.text
                 break  # Assumes only one 'pIPI' per 'det' element
-
+        
+        # Assure formatting with two decimals
+        icms_value = f"{float(icms_value):.2f}%"
+        ipi_value = f"{float(ipi_value):.2f}%"
+        
         product_data = {
           "Nome do Produto": item.find('.//nfe:prod/nfe:xProd', namespaces=namespaces).text,
           "CFOP": item.find('.//nfe:prod/nfe:CFOP', namespaces=namespaces).text,

@@ -11,9 +11,9 @@ class TestXMLProcessor(unittest.TestCase):
     data = extract_data_from_xml(xml_file, namespaces)
     self.assertTrue(len(data) > 0, "No data extracted. Check XML file and extraction logic.")
     self.assertEqual(data[0]['CFOP'], '6401')
-    self.assertEqual(data[0]['Alíq. ICMS'], '12.0000')
-    self.assertEqual(data[0]['Alíq. IPI'], '0')
-    self.assertEqual(data[3]['Alíq. IPI'], '3.2500')
+    self.assertEqual(data[0]['Alíq. ICMS'], '12.00%')
+    self.assertEqual(data[0]['Alíq. IPI'], '0.00%')
+    self.assertEqual(data[3]['Alíq. IPI'], '3.25%')
 
   def test_extract_lazz(self):
     """Tests data extraction from 'xml-lazz.xml'."""
@@ -22,11 +22,11 @@ class TestXMLProcessor(unittest.TestCase):
     data = extract_data_from_xml(xml_file, namespaces)
     self.assertTrue(len(data) > 0, "No data extracted. Check XML file and extraction logic.")
     self.assertEqual(data[0]['CFOP'], '6102')
-    self.assertEqual(data[0]['Alíq. ICMS'], '12.00')
-    self.assertEqual(data[0]['Alíq. IPI'], '6.50')
+    self.assertEqual(data[0]['Alíq. ICMS'], '12.00%')
+    self.assertEqual(data[0]['Alíq. IPI'], '6.50%')
     self.assertEqual(data[1]['CFOP'], '6403')
-    self.assertEqual(data[1]['Alíq. ICMS'], '12.00')
-    self.assertEqual(data[1]['Alíq. IPI'], '3.25')
+    self.assertEqual(data[1]['Alíq. ICMS'], '12.00%')
+    self.assertEqual(data[1]['Alíq. IPI'], '3.25%')
 
 # Run the tests
 if __name__ == '__main__':

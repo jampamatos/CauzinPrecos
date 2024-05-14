@@ -34,8 +34,10 @@
           Nome do Produto: {{ product['Nome do Produto'] }}<br>
           CFOP: {{ product['CFOP'] }}<br>
           Valor Unitário: R$ {{ product['Valor Unitário'] }}<br>
-          Alíq. ICMS: {{ product['Alíq. ICMS'] }}%<br>
-          Alíq. IPI: {{ product['Alíq. IPI'] }}%<br>
+          Alíq. ICMS: {{ product['Alíq. ICMS'] }}<br>
+          Alíq. IPI: {{ product['Alíq. IPI'] }}<br>
+          Preço de Custo Final: R$ {{ product['Preço de Custo Final'] }}<br>
+          Preço de Venda: R$ {{ product['Preço de Venda'] }}
         </p>
         <hr>
       {% endfor %}
