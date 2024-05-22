@@ -44,6 +44,7 @@
                 <th>Aliq. IPI</th>
                 <th>Frete</th>
                 <th>Imposto Federal</th>
+                <th>Custo Final</th>
                 <th>Venda Final</th>
             </tr>
             {% for product in product_data %}
@@ -55,6 +56,7 @@
                 <td>{{ product['Alíq. IPI'] }}</td>
                 <td>{{ freight }}%</td>
                 <td>{{ 'Sim' if include_tax else 'Não' }}</td>
+                <td>R$ {{ '%.2f' | format(product['Preço de Custo Final']) }}</td>
                 <td>R$ {{ '%.2f' | format(product['Preço de Venda']) }}</td>
             </tr>
             {% endfor %}
