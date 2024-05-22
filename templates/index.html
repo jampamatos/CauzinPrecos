@@ -4,6 +4,20 @@
     <meta charset="utf-8">
     <title>Calculadora de Preço de Venda</title>
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="application/json" id="productData">
+        {{ product_data|tojson }}
+    </script>
+    <script type="application/json" id="additionalData">
+        {{ additional }}
+    </script>
+    <script type="application/json" id="freightData">
+        {{ freight }}
+    </script>
+    <script type="application/json" id="includeTaxData">
+        {{ include_tax|tojson }}
+    </script>
+    <script src="/static/script.js"></script>
 </head>
 <body>
     <h1>Calculadora de Preço de Venda</h1>
@@ -44,6 +58,7 @@
                 <th>Aliq. IPI</th>
                 <th>Frete</th>
                 <th>Imposto Federal</th>
+                <th>Markup (%)</th>
                 <th>Custo Final</th>
                 <th>Venda Final</th>
             </tr>
@@ -56,6 +71,7 @@
                 <td>{{ product['Alíq. IPI'] }}</td>
                 <td>{{ freight }}%</td>
                 <td>{{ 'Sim' if include_tax else 'Não' }}</td>
+                <td><input type="number" class="markup-input" step="0.1" value="{{ markup }}" data-index="{{ loop.index0 }}"></td>
                 <td>R$ {{ '%.2f' | format(product['Preço de Custo Final']) }}</td>
                 <td>R$ {{ '%.2f' | format(product['Preço de Venda']) }}</td>
             </tr>
